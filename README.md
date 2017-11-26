@@ -48,7 +48,7 @@
 - MySQL Procedure 코드를 작성해 INSERT / UPDATE에 Trigger를 적용해 놓았다.
 	- INSERT 시 : hsb\_rank에 작성된 날짜(reg_ymdt에 저장됨)를 1711240312와 같이 분 단위의 Integer로 변환하여 저장해 주는데, hsb\_rank에 이미 존재한다면 댓글 증감 수치만 1 증가시킨다.
 	- UPDATE 시 : INSERT와 같은 처리를 하지만, 수정된 날짜에 대해 처리해야 하므로 mod_ymdt(수정된 날짜) 데이터를 이용하여 저장한다.
-	- __UPSERT__를 이용하여 효율적으로 처리했다.
+	- ___UPSERT___를 이용하여 효율적으로 처리했다.
 
 ## Implementation
 ![total Structure](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/total_structure.jpg)
@@ -64,7 +64,7 @@
 ### 3) MySQL Trigger on Cache
 - hsb\_cache 테이블에 MySQL Procedure 코드를 작성해 hsb\_rank 테이블에 대한 INSERT와 UPDATE(삭제도 UPDATE다) Trigger를 등록시켜 놓는다. 이로 인해 따로 Spring Server에서 Query 요청을 관리할 필요가 없어지고, 일련의 과정은 하나의 Transaction처럼 이루어진다.
 - 이 과정을 통해 hsb\_cache에 INSERT / UPDATE 쿼리 요청 시 Trigger가 실행되어 자동으로 hsb\_rank에 랭킹이 갱신되며 저장된다.
-- 즉 이 단계까지는 Database에 프로그래밍하는 것만으로 해결되었으므로 __Spring Server가 필요가 없었다.__  
+- 즉 이 단계까지는 Database에 프로그래밍하는 것만으로 해결되었으므로 ___Spring Server가 필요가 없었다.___  
 
 ### 4) Daemon by Cron
 - Spring Server에서 1분 단위로 hsb\_rank 테이블로부터 Top 100을 선정하여 hsb\_rankspan 테이블에 저장해 준다.
