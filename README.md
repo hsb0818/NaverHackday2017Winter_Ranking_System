@@ -19,15 +19,15 @@
 
 ## DataBase Table Structure
 
-![database structure](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/db0.jpg)
+![database structure](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/db0.jpg)
 #### Database : comment
 #### Tables : cmt_cnts, hsb\_cache, hsb\_rank, hsb\_rankspan
 ---
 ### cmt_cnts
-![cmt_cnts](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/cmt_cnts.png)
+![cmt_cnts](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/cmt_cnts.png)
 ### - 실시간으로 초당 500개의 댓글이 무작위 컨텐츠에 무작위로 INSERT된다.
 ### hsb_rank
-![hsb_rank](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/hsb_rank.png)
+![hsb_rank](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/hsb_rank.png)
 
 - 특정 날짜의 Service의 Content에 대한 댓글 증감수를 분 단위로 모두 기록해 Rank를 매기는 곳이다.
 - hsb\_cache에 데이터가 추가/수정될 때마다, 적용된 Trigger가 실행되어 이곳에 해당 댓글의 Service ID와 Contents ID, 그리고 분 단위의 날짜 값이 모두 일치하는 Row를 찾아 댓글 증감을 표시하게 된다.  
@@ -35,13 +35,13 @@
 	- WRITE에 대해 수행함에 있어 신경 쓸 만 한 부하가 없었다.   
 
 ### hsb_rankspan
-![hsb_rankspan](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/hsb_rankspan.png)
+![hsb_rankspan](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/hsb_rankspan.png)
 
 - hsb_rank로부터 분 단위로 저장된 랭킹들로부터 Top 100을 선정하여 저장하는 테이블이다. 최종적으로 이 테이블을 통해 API 기능을 제공하게 되며, 유저는 날짜, Service ID, Contents ID를 통해 데이터를 제공받을 수 있다.
 
 
 ### hsb_cache
-![hsb_cache](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/hsb_cache.png)
+![hsb_cache](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/hsb_cache.png)
 
 - 서버가 실행된 후로부터는 cmt_cnts에 추가되는 댓글들이 이 테이블에도 추가된다.
 - Delete요청마다 삭제하면 느리고, 복구를 해야 할 수 있으므로 del_yn column을 만들어 UPDATE 요청으로 mark만 해 놓는 방식을 이용한다.
@@ -51,7 +51,7 @@
 	- __UPSERT__를 이용하여 효율적으로 처리했다.
 
 ## Implementation
-![total Structure](https://raw.githubusercontent.com/hsb0818/ranking_system/master/src/total_structure.jpg)
+![total Structure](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/total_structure.jpg)
 ### 1) 댓글?
 - 1분에 3만 건의 댓글이 무작위로 INSERT / UPDATE 된다.
 - 새로운 컨텐츠는 계속 새로 추가된다.
