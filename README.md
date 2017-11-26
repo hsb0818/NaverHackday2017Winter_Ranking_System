@@ -64,7 +64,7 @@
 ### 3) MySQL Trigger on Cache
 - hsb\_cache 테이블에 MySQL Procedure 코드를 작성해 hsb\_rank 테이블에 대한 INSERT와 UPDATE(삭제도 UPDATE다) Trigger를 등록시켜 놓는다. 이로 인해 따로 Spring Server에서 Query 요청을 관리할 필요가 없어지고, 일련의 과정은 하나의 Transaction처럼 이루어진다.
 - 이 과정을 통해 hsb\_cache에 INSERT / UPDATE 쿼리 요청 시 Trigger가 실행되어 자동으로 hsb\_rank에 랭킹이 갱신되며 저장된다.
-- 즉 이 단계까지는 Database에 프로그래밍하는 것만으로 해결되었으므로 ___Spring Server가 필요가 없었다.___  
+- 즉 이 단계까지는 Database에 프로그래밍하는 것만으로 해결되었으므로, 실제로는 어느 서버를 거쳐 댓글이 달리든지 상관이 없다. 즉, 여기까지는 따로 ___나만의 Spring Server 구현이 필요하지는 않았다.___
 
 ### 4) Daemon by Cron
 - Spring Server에서 1분 단위로 hsb\_rank 테이블로부터 Top 100을 선정하여 hsb\_rankspan 테이블에 저장해 준다.
