@@ -53,7 +53,7 @@
 ## Implementation
 ![total Structure](https://raw.githubusercontent.com/hsb0818/NaverHackday2017Winter_Ranking_System/master/src/total_structure.jpg)
 
-#### *___실제로___ 서비스를 하게 된다면 같은 데이터를 다른 테이블에 2번 씩이나 Insert하는 것은 비효율적이다. 원래 댓글에 대한 처리 후 처리한 데이터를 cmt_cnts 테이블로 옮기는 방식을 사용하는 것이 효율적이지만, 멘토님께서 cmt_cnts 테이블에 댓글을 무작위로 등록할 것이라 하셨으니 cmt_cnts 테이블을 사용하지 않는 방법은 고려하지 않았다.
+#### *___실제로___ 서비스를 하게 된다면 같은 데이터를 다른 테이블에 2번 씩이나 Insert하는 것은 비효율적이다. 원래 댓글에 대한 처리 후 처리한 데이터를 cmt_cnts 테이블로 옮기는 방식을 사용하는 것이 효율적이지만, 멘토님께서 cmt_cnts 테이블에 댓글을 무작위로 등록할 것이라 하셨으니 cmt_cnts 테이블에 우선적으로 댓글이 저장되는 방식을 변경할 수는 없었다.
 
 
 ### 1) 댓글?
